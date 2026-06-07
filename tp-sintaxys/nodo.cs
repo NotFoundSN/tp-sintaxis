@@ -13,43 +13,58 @@ namespace tp_sintaxys
 
         public node ()
         {
-            this.name = "";
-            this.isFinal = false;
+            this._name = "";
+            this._isFinal = false;
             this._transitionList = new List<transition>();
         }
         public node(string name, bool isFinal)
         { 
-            this.name = name;
-            this.isFinal = isFinal;
+            this._name = name;
+            this._isFinal = isFinal;
             this._transitionList = new List<transition>();
         }
         public bool isFinal {
             get { return this._isFinal; }
-            set { this._isFinal = value; }
         }
 
         public string name
         {
             get { return this._name; }
-            set { this._name = value; }
         }
 
         public List<transition> transitionList {
             get { return this._transitionList.ToList(); }
         }
 
-        public bool addJump(transition newTransition)
+        public bool addTransition(char character, node state)
         {
-            this._transitionList.Add(newTransition);
-            return true;
+            try
+            {
+                if (character != null && character != ' ')
+                {
+                    transition newTransition = new transition(state, character);
+                    this._transitionList.Add(newTransition);
+                    return true;
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        public bool searchJump(string character, out transition existTransition)
+        public bool nextState(char character, out node nextState)
         {
             bool exist = false;
-            existTransition = this._transitionList.FirstOrDefault(actualTransition => actualTransition.character == character);
+            nextState = null;
+            transition existTransition = this._transitionList.FirstOrDefault(actualTransition => actualTransition.character == character);
             if (existTransition != null)
             {
+                nextState = existTransition.state;
                 exist = true;
             }
             return exist;

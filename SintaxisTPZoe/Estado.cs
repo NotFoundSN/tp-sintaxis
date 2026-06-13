@@ -4,9 +4,8 @@ namespace SintaxisTPZoe
     public class Estado
     {
         public string Nombre { get; }
-        public bool EsFinal { get; set; }
+        public bool EsFinal { get; }
 
-        //es como una lista hacia donde puede ir y con que caracteres podria moverse hacia ese estado
         private readonly Dictionary<char, Estado> transiciones = new Dictionary<char, Estado>();
 
         public Estado(string nombre, bool esFinal = false)

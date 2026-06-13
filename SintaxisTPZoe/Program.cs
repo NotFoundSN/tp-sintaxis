@@ -35,7 +35,6 @@ namespace SintaxisTPZoe
 
         static void mostrarMenu(List<Automata> automatas)
         {
-            Console.ForegroundColor = ConsoleColor.Magenta; //perdon, era chiste pero tenia que poner rosa
             Console.WriteLine("*************** AUTÓMATAS FINITOS ***************");
             Console.WriteLine("Elija un autómata para evaluar una cadena:");
             Console.WriteLine();
@@ -76,11 +75,11 @@ namespace SintaxisTPZoe
             Console.Write("Escriba la cadena a evaluar: ");
             string cadena = Console.ReadLine() ?? "";
 
-            bool aceptada = automata.Evaluar(cadena);
+            ResultadoEvaluacion resultado = automata.Evaluar(cadena);
 
             Console.WriteLine();
 
-            if (aceptada)
+            if (resultado.Aceptada)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"La cadena \"{cadena}\" SÍ pertenece al lenguaje {automata.Nombre}.");
@@ -89,6 +88,19 @@ namespace SintaxisTPZoe
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"La cadena \"{cadena}\" NO pertenece al lenguaje {automata.Nombre}.");
+
+                switch (resultado.Motivo)
+                {
+                    case MotivoRechazo.SimboloSinTransicion:
+                        Console.WriteLine($"Motivo: no hay transición para el símbolo '{resultado.Simbolo}' " +
+                                          $"(posición {resultado.Posicion + 1}). La cadena no es válida desde ese punto.");
+                        break;
+
+                    case MotivoRechazo.EstadoNoFinal:
+                        Console.WriteLine($"Motivo: la cadena se consumió por completo, pero el autómata terminó " +
+                                          $"en el estado '{resultado.EstadoAlcanzado}', que no es un estado final.");
+                        break;
+                }
             }
             Console.ResetColor();
 

@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace SintaxisTPZoe
 {
     public class Automata
@@ -15,21 +13,27 @@ namespace SintaxisTPZoe
             EstadoInicial = estadoInicial;
         }
 
-        public bool Evaluar(string cadena)
+        public ResultadoEvaluacion Evaluar(string cadena)
         {
-            Estado? actual = EstadoInicial;
+            Estado actual = EstadoInicial;
 
-            foreach (char simbolo in cadena)
+            for (int i = 0; i < cadena.Length; i++)
             {
-                actual = actual.Transicionar(simbolo);
+                char simbolo = cadena[i];
+                Estado? siguiente = actual.Transicionar(simbolo);
 
-                if (actual == null)
+                if (siguiente == null)
                 {
-                    return false;
+                    
+                    return ResultadoEvaluacion.SinTransicion(i, simbolo);
                 }
+
+                actual = siguiente;
             }
 
-            return actual.EsFinal;
+            return actual.EsFinal
+                ? ResultadoEvaluacion.Exito()
+                : ResultadoEvaluacion.EstadoNoFinal(actual.Nombre);
         }
 
     }

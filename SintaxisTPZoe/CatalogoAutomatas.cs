@@ -2,9 +2,6 @@ namespace SintaxisTPZoe
 {
     public static class CatalogoAutomatas
     {
-        /*No agregue un archivo tipo json o demas porque no vimos nada de eso como para 
-         * cargar los automatas de alguna otra manera. Ademas con objetos quedaba lindo.
-        */
         public static List<Automata> CrearTodos()
         {
             return new List<Automata>
@@ -30,9 +27,9 @@ namespace SintaxisTPZoe
         {
             Estado q0 = new Estado("q0");                 
             Estado q1 = new Estado("q1");                 
-            Estado q2 = new Estado("q2", esFinal: true);  
-            Estado q3 = new Estado("q3");                 
-            Estado q4 = new Estado("q4", esFinal: true);  
+            Estado q2 = new Estado("q2", esFinal: true);
+            Estado q3 = new Estado("q3", esFinal: true);  
+            Estado q4 = new Estado("q4", esFinal: true);
 
             q0.AgregarTransicion('a', q1);
             q1.AgregarTransicion('b', q2);

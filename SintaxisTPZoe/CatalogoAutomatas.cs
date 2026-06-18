@@ -15,21 +15,21 @@ namespace SintaxisTPZoe
         public static Automata CrearL3()
         {
             Estado q0 = new Estado("q0");
-            Estado q1 = new Estado("q1", esFinal: true);
+            Estado q1 = new Estado("q1", true);
 
             q0.AgregarTransicion('a', q0);
             q0.AgregarTransicion('b', q1); 
             
-            return new Automata("L3", "{ aⁿb | n ≥ 0 }", q0);
+            return new Automata("L3", "{ a^nb | n >= 0 }", q0);
         }
 
         public static Automata CrearL4()
         {
             Estado q0 = new Estado("q0");                 
             Estado q1 = new Estado("q1");                 
-            Estado q2 = new Estado("q2", esFinal: true);
-            Estado q3 = new Estado("q3", esFinal: true);  
-            Estado q4 = new Estado("q4", esFinal: true);
+            Estado q2 = new Estado("q2", true);
+            Estado q3 = new Estado("q3", true);  
+            Estado q4 = new Estado("q4", true);
 
             q0.AgregarTransicion('a', q1);
             q1.AgregarTransicion('b', q2);
@@ -41,7 +41,7 @@ namespace SintaxisTPZoe
             q3.AgregarTransicion('c', q3);
 
 
-            return new Automata("L4", "{ (ab)ⁿ · (cᵖ | b) | n ≥ 1, p ≥ 0 }", q0);
+            return new Automata("L4", "{ (ab)^n · (c^p | b) | n >= 1, p >= 0 }", q0);
         }
 
         public static Automata CrearL5()
@@ -64,7 +64,7 @@ namespace SintaxisTPZoe
             q3.AgregarTransicion('c', q1);
 
 
-            return new Automata("L5", "{ aⁿ·w | w ∈ {b,c}*, w con impar de 'c'; n ≥ 0 }", q0);
+            return new Automata("L5", "{ a^n·w | w E(pertenece) {b,c}*, w con impar de 'c'; n >= 0 }", q0);
         }
     }
 }

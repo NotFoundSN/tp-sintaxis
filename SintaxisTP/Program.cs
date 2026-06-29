@@ -1,4 +1,4 @@
-namespace SintaxisTPZoe
+namespace SintaxisTP
 {
     internal class Program
     {

@@ -1,4 +1,4 @@
-namespace SintaxisTPZoe
+namespace SintaxisTP
 {
     public static class CatalogoAutomatas
     {

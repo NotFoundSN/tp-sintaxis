@@ -1,4 +1,4 @@
-namespace SintaxisTPZoe
+namespace SintaxisTP
 {
     public class Automata
     {
@@ -24,7 +24,6 @@ namespace SintaxisTPZoe
 
                 if (siguiente == null)
                 {
-                    
                     return ResultadoEvaluacion.SinTransicion(i, simbolo);
                 }
 
